@@ -7,7 +7,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.core.io.ClassPathResource
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
@@ -60,34 +59,58 @@ class ConverterSpec extends Specification {
             ]
     }
 
-    def 'should create minimal xls document with correct headers'() {
+    def 'should create xls document with correct headers'() {
         when:
-            def response = template.postForEntity('/convert', resource('/converter/minimal.json'), byte[])
+            def response = template.postForEntity('/convert', resource('/converter/complex.json'), byte[])
         then:
             response.statusCode == HttpStatus.OK
         and:
-            response.headers.get('Content-disposition').first() == 'attachment; filename=FileName.xls'
+            response.headers.get('Content-disposition').first() == 'attachment; filename=Two sheets file.xls'
             response.headers.get('charset').first() == 'utf-8'
             response.headers.getContentType() == valueOf("application/vnd.ms-excel")
             response.headers.getContentLength() == response.body.length
     }
 
-    def 'should create minimal xls document with correct data'() {
+    def 'should create xls with correct document'() {
         when:
-            def response = template.postForEntity('/convert', resource('/converter/minimal.json'), byte[])
+            def response = template.postForEntity('/convert', resource('/converter/complex.json'), byte[])
         then:
             response.statusCode == HttpStatus.OK
         and:
             Workbook workbook = new XSSFWorkbook(new ByteArrayInputStream(response.body))
-            workbook.numberOfSheets == 1
+            hasTwoSheets(workbook)
+            firstSheetHasTwoRows(workbook)
+            firstSheetHasTwoRowsWithColumnInside(workbook)
+            secondSheetHasOneRow(workbook)
+            firstSheetHasRowWithTwoColumnsInside(workbook)
+    }
 
-            def sheet = workbook.getSheet('FirstSheet')
-            sheet.physicalNumberOfRows == 1
+    private static void hasTwoSheets(XSSFWorkbook workbook) {
+        assert workbook.numberOfSheets == 2
 
-            def row = sheet.getRow(0)
-            row.physicalNumberOfCells == 1
+        assert workbook.getSheet('Two rows sheet') != null
+        assert workbook.getSheet('Two columns sheet') != null
+    }
 
-            row.getCell(0).toString() == 'sample'
+    private static void firstSheetHasTwoRows(XSSFWorkbook workbook) {
+        assert workbook.getSheetAt(0).physicalNumberOfRows == 2
+    }
+
+    private static void firstSheetHasTwoRowsWithColumnInside(XSSFWorkbook workbook) {
+        assert workbook.getSheetAt(0).getRow(0).physicalNumberOfCells == 1
+        assert workbook.getSheetAt(0).getRow(0).getCell(0).toString() == 'First row column data'
+        assert workbook.getSheetAt(0).getRow(1).physicalNumberOfCells == 1
+        assert workbook.getSheetAt(0).getRow(1).getCell(0).toString() == 'Second row column data'
+    }
+
+    private static void secondSheetHasOneRow(XSSFWorkbook workbook) {
+        assert workbook.getSheetAt(1).physicalNumberOfRows == 1
+    }
+
+    private static void firstSheetHasRowWithTwoColumnsInside(XSSFWorkbook workbook) {
+        assert workbook.getSheetAt(1).getRow(0).physicalNumberOfCells == 2
+        assert workbook.getSheetAt(1).getRow(0).getCell(0).toString() == 'First column data'
+        assert workbook.getSheetAt(1).getRow(0).getCell(1).toString() == 'Second column data'
     }
 
     private static ConvertRequest resource(String path) {

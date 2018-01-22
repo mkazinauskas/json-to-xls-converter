@@ -1,0 +1,39 @@
+{
+  "fileName": "Two sheets file",
+  "sheets": [
+    {
+      "name": "Two rows sheet",
+      "rows": [
+        {
+          "columns": [
+            {
+              "data": "First row column data"
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "data": "Second row column data"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Two columns sheet",
+      "rows": [
+        {
+          "columns": [
+            {
+              "data": "First column data"
+            },
+            {
+              "data": "Second column data"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

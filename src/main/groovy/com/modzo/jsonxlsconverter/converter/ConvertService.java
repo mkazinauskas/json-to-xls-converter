@@ -27,16 +27,18 @@ class ConvertService {
     }
 
     private void convertRow(Sheet sheet, ConvertRequest.Sheet.Row row) {
-        Row xlsRow = sheet.createRow(sheet.getLastRowNum());
+        int cellNumber = sheet.getPhysicalNumberOfRows() == 0 ? 0 : sheet.getLastRowNum() + 1;
+        Row xlsRow = sheet.createRow(cellNumber);
         row.getColumns().forEach(column -> convertColumn(xlsRow, column));
     }
 
     private void convertColumn(Row xlsRow, ConvertRequest.Sheet.Row.Column column) {
-        Cell cell = xlsRow.createCell(xlsRow.getLastCellNum() + 1, CellType.STRING);
+        int cellNumber = xlsRow.getLastCellNum() == -1 ? 0 : xlsRow.getLastCellNum();
+        Cell cell = xlsRow.createCell(cellNumber, CellType.STRING);
         cell.setCellValue(column.getData());
     }
 
-    private byte[] asBytes (Workbook workbook){
+    private byte[] asBytes(Workbook workbook) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         try {
             workbook.write(output);

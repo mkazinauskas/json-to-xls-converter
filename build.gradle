@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.13'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.codehaus.groovy:groovy-all:2.4.13'
 	compile 'org.apache.poi:poi:3.15'
 	compile 'org.apache.poi:poi-ooxml:3.15'
 

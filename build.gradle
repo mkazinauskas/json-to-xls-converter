@@ -11,6 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
@@ -22,8 +23,13 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.13'
+	compile 'org.apache.poi:poi:3.15'
+	compile 'org.apache.poi:poi-ooxml:3.15'
+
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
 }

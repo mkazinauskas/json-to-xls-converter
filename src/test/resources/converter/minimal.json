@@ -1,0 +1,17 @@
+{
+  "fileName": "FileName",
+  "sheets": [
+    {
+      "rows": [
+        {
+          "columns": [
+            {
+              "data": "sample"
+            }
+          ]
+        }
+      ],
+      "name": "FirstSheet"
+    }
+  ]
+}

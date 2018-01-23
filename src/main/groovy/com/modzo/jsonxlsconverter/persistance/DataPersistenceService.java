@@ -1,4 +1,4 @@
-package com.modzo.jsonxlsconverter.converter.persistance;
+package com.modzo.jsonxlsconverter.persistance;
 
 public interface DataPersistenceService {
     void save(long id, File file);

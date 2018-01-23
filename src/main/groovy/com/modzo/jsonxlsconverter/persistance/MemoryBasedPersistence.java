@@ -1,4 +1,4 @@
-package com.modzo.jsonxlsconverter.converter.persistance;
+package com.modzo.jsonxlsconverter.persistance;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

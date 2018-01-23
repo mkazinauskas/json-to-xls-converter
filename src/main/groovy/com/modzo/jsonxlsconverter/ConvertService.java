@@ -1,6 +1,5 @@
-package com.modzo.jsonxlsconverter.converter;
+package com.modzo.jsonxlsconverter;
 
-import com.modzo.jsonxlsconverter.InternalServerError;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;

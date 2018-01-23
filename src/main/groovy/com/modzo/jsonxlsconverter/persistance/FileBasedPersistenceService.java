@@ -1,6 +1,7 @@
-package com.modzo.jsonxlsconverter.converter.persistance;
+package com.modzo.jsonxlsconverter.persistance;
 
 import com.modzo.jsonxlsconverter.InternalServerError;
+import com.modzo.jsonxlsconverter.persistance.PersistenceConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

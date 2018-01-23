@@ -1,7 +1,6 @@
 package com.modzo.jsonxlsconverter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.modzo.jsonxlsconverter.converter.ConvertRequest
 import org.apache.poi.ss.usermodel.Workbook
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.beans.factory.annotation.Autowired

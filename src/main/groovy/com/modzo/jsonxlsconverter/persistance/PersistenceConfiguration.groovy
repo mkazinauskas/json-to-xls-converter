@@ -1,4 +1,4 @@
-package com.modzo.jsonxlsconverter.converter.persistance
+package com.modzo.jsonxlsconverter.persistance
 
 import org.hibernate.validator.constraints.NotBlank
 import org.springframework.boot.context.properties.ConfigurationProperties

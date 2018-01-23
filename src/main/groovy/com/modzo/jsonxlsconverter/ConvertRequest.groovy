@@ -1,4 +1,4 @@
-package com.modzo.jsonxlsconverter.converter
+package com.modzo.jsonxlsconverter
 
 import org.hibernate.validator.constraints.NotBlank
 import org.hibernate.validator.constraints.NotEmpty

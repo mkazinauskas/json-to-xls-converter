@@ -1,6 +1,6 @@
-package com.modzo.jsonxlsconverter.converter;
+package com.modzo.jsonxlsconverter;
 
-import com.modzo.jsonxlsconverter.converter.persistance.DataPersistenceService;
+import com.modzo.jsonxlsconverter.persistance.DataPersistenceService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

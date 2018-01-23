@@ -35,7 +35,8 @@ class MemoryBasedPersistence implements DataPersistenceService {
     }
 
     @Override
-    public File get(long id) {
+    public File retrieve(long id) {
+        LOG.info(format("Retrieving cached file with id = `%s`", id));
         File file = cache.getIfPresent(id);
         if (file == null) {
             throw new InternalServerError(format("File with id = `%s` was not found", id));

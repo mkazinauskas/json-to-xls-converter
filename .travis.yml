@@ -10,4 +10,4 @@ cache:
   directories:
   - $HOME/.gradle
 
-build: ./gradlew clean build --continue
+build: ./gradlew clean build --continue --parallel

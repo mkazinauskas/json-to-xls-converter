@@ -1,0 +1,4 @@
+converter.persistence.type: memory
+spring:
+  profiles:
+    active: test

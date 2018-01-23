@@ -3,7 +3,7 @@ package com.modzo.jsonxlsconverter.converter.persistance;
 public interface DataPersistenceService {
     void save(long id, File file);
 
-    File get(long id);
+    File retrieve(long id);
 
     class File {
         private final String fileName;

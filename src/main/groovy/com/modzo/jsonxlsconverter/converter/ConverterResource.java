@@ -18,7 +18,7 @@ class ConverterResource {
 
     private final ConvertService service;
 
-    public ConverterResource(DataPersistenceService dataPersistence, ConvertService service) {
+    ConverterResource(DataPersistenceService dataPersistence, ConvertService service) {
         this.dataPersistence = dataPersistence;
         this.service = service;
     }
@@ -34,7 +34,7 @@ class ConverterResource {
 
     @GetMapping("/download")
     ResponseEntity<byte[]> download(@RequestParam("id") long id) {
-        DataPersistenceService.File file = dataPersistence.get(id);
+        DataPersistenceService.File file = dataPersistence.retrieve(id);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("charset", "utf-8");
         responseHeaders.setContentType(MediaType.valueOf("application/vnd.ms-excel"));

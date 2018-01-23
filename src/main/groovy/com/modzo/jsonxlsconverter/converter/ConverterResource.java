@@ -39,7 +39,7 @@ class ConverterResource {
         responseHeaders.set("charset", "utf-8");
         responseHeaders.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
         responseHeaders.setContentLength(file.getContent().length);
-        responseHeaders.set("Content-disposition", "attachment; filename=" + file.getFileName() + ".xls");
+        responseHeaders.set("Content-disposition", "attachment; filename=" + file.getFileName() + ".xlsx");
 
         return new ResponseEntity<>(file.getContent(), responseHeaders, HttpStatus.OK);
     }

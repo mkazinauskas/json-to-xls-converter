@@ -58,7 +58,7 @@ class ConverterSpec extends Specification {
             ]
     }
 
-    def 'should create xls document with correct headers'() {
+    def 'should create xlsx document with correct headers'() {
         when:
             def saveResponse = template.postForEntity('/convert', resource('/converter/complex.json'), String)
         then:
@@ -69,13 +69,13 @@ class ConverterSpec extends Specification {
         then:
             response.statusCode == HttpStatus.OK
         and:
-            response.headers.get('Content-disposition').first() == "attachment; filename=Two sheets file.xls"
+            response.headers.get('Content-disposition').first() == "attachment; filename=Two sheets file.xlsx"
             response.headers.get('charset').first() == 'utf-8'
             response.headers.getContentType() == MediaType.valueOf("application/vnd.ms-excel")
             response.headers.getContentLength() == response.body.length
     }
 
-    def 'should create xls with correct document'() {
+    def 'should create xlsx with correct document'() {
         when:
             def saveResponse = template.postForEntity('/convert', resource('/converter/complex.json'), String)
         then:

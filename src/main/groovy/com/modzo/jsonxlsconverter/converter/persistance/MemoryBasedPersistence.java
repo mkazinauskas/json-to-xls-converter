@@ -6,12 +6,14 @@ import com.google.common.cache.RemovalNotification;
 import com.modzo.jsonxlsconverter.InternalServerError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Service
+@ConditionalOnProperty(name = "converter.persistence.type", havingValue = "memory")
 class MemoryBasedPersistence implements DataPersistenceService {
 
     private static final Logger LOG = LoggerFactory.getLogger(MemoryBasedPersistence.class);

@@ -26,7 +26,11 @@
 }
 ```
 It will return `location` header with link to saved xls file. 
-File is saved to in memory cache and it will be removed after 20 minutes (default). 
+
+You can configure what storage it will use by `converter.persistence.type` property. 
+There are two options `memory` or `file`. 
+
+By default file is saved to in memory cache and it will be removed after 20 minutes. 
 If you want to adjust it, please add `converter.persistence.time-in-minutes` property to `application.yml` file. 
 
 * Do 'GET' request to `/download?id={your-xls-id}` to download xls file.

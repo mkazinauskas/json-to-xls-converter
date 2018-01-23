@@ -4,6 +4,7 @@ import com.modzo.jsonxlsconverter.InternalServerError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//@Service
+@Service
+@ConditionalOnProperty(name = "converter.persistence.type", havingValue = "file")
 class FileBasedPersistenceService implements DataPersistenceService {
 
     private String filePath;

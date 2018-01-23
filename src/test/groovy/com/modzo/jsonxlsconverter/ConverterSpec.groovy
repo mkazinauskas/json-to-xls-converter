@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 import spock.lang.Unroll
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
-import static org.springframework.http.MediaType.valueOf
 
 @ContextConfiguration
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -44,7 +44,6 @@ class ConverterSpec extends Specification {
                             )]
                     )]),
                     new ConvertRequest(
-                            fileName: 'FileName',
                             sheets: [new ConvertRequest.Sheet(
                                     rows: [new ConvertRequest.Sheet.Row(
                                             columns: [new ConvertRequest.Sheet.Row.Column(data: '')]
@@ -61,19 +60,29 @@ class ConverterSpec extends Specification {
 
     def 'should create xls document with correct headers'() {
         when:
-            def response = template.postForEntity('/convert', resource('/converter/complex.json'), byte[])
+            def saveResponse = template.postForEntity('/convert', resource('/converter/complex.json'), String)
+        then:
+            saveResponse.statusCode == HttpStatus.CREATED
+            String location = saveResponse.headers.getLocation().toString()
+        when:
+            def response = template.getForEntity(location, byte[])
         then:
             response.statusCode == HttpStatus.OK
         and:
-            response.headers.get('Content-disposition').first() == 'attachment; filename=Two sheets file.xls'
+            response.headers.get('Content-disposition').first() == "attachment; filename=Two sheets file.xls"
             response.headers.get('charset').first() == 'utf-8'
-            response.headers.getContentType() == valueOf("application/vnd.ms-excel")
+            response.headers.getContentType() == MediaType.valueOf("application/vnd.ms-excel")
             response.headers.getContentLength() == response.body.length
     }
 
     def 'should create xls with correct document'() {
         when:
-            def response = template.postForEntity('/convert', resource('/converter/complex.json'), byte[])
+            def saveResponse = template.postForEntity('/convert', resource('/converter/complex.json'), String)
+        then:
+            saveResponse.statusCode == HttpStatus.CREATED
+            String location = saveResponse.headers.getLocation().toString()
+        when:
+            def response = template.getForEntity(location, byte[])
         then:
             response.statusCode == HttpStatus.OK
         and:

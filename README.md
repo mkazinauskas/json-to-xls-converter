@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/modestukasai/json-to-xls-converter.svg?branch=master)](https://travis-ci.org/modestukasai/json-to-xls-converter)
 
+[![Coverage Status](https://coveralls.io/repos/github/modestukasai/json-to-xls-converter/badge.svg?branch=master)](https://coveralls.io/github/modestukasai/json-to-xls-converter?branch=master)
+
 ## Usage
 
 * Do `POST` request to `/convert` endpoint with body

@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @ContextConfiguration
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class AbstractConverterSpec extends Specification{
+abstract class AbstractConverterSpec extends Specification{
     @Autowired
     TestRestTemplate template
 
